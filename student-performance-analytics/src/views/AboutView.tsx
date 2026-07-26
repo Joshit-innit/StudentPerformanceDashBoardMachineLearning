@@ -1,5 +1,6 @@
 import React from 'react';
 import { Sparkles, TrendingUp, Target, Github, Linkedin, Cpu, CheckCircle2 } from 'lucide-react';
+import profilePhoto from '../assets/profile-photo.png';
 
 interface AboutViewProps {
   onOpenProfile: () => void;
@@ -71,9 +72,9 @@ export const AboutView: React.FC<AboutViewProps> = ({ onOpenProfile }) => {
           {/* Photo with Overlay Title */}
           <div className="relative h-64 sm:h-72">
             <img
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800"
+              src={profilePhoto}
               alt="Tammana Joshit"
-              className="w-full h-full object-cover opacity-80"
+              className="w-full h-full object-contain opacity-95 bg-[#5864d8]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0B1A] via-[#0A0B1A]/40 to-transparent p-6 flex flex-col justify-end text-white">
               <h3 className="text-2xl font-bold tracking-tight">
@@ -94,7 +95,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ onOpenProfile }) => {
 
             <div className="grid grid-cols-2 gap-3 pt-1">
               <a
-                href="https://github.com"
+                href="https://github.com/Joshit-innit/Joshit-innit"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-blue-500 hover:bg-blue-600 text-white font-bold text-xs sm:text-sm transition-all shadow-lg shadow-blue-500/30"
@@ -102,7 +103,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ onOpenProfile }) => {
                 <Github className="w-4 h-4" /> GitHub
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/tammana-joshit-97516b344"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs sm:text-sm transition-all border border-white/15"

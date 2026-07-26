@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Hero3DCanvas } from '../components/three/Hero3DCanvas';
 import { TabType, CohortMetrics } from '../types';
 import { Users, Star, Calendar, Cpu, Sparkles, RefreshCw, ArrowRight, Radio, Activity } from 'lucide-react';
+import { cohortMetrics } from '../data/edaData';
 
 interface DashboardViewProps {
   onNavigate: (tab: TabType) => void;
@@ -9,10 +10,10 @@ interface DashboardViewProps {
 
 export const DashboardView: React.FC<DashboardViewProps> = ({ onNavigate }) => {
   const [metrics, setMetrics] = useState<CohortMetrics>({
-    totalStudents: 6607,
-    avgExamScore: 84.2,
-    avgAttendance: 92.5,
-    predAccuracy: 97.8,
+    totalStudents: cohortMetrics.totalStudents,
+    avgExamScore: cohortMetrics.avgExamScore,
+    avgAttendance: cohortMetrics.avgAttendance,
+    avgStudyHours: cohortMetrics.avgStudyHours,
   });
 
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -21,10 +22,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ onNavigate }) => {
     setIsRefreshing(true);
     setTimeout(() => {
       setMetrics({
-        totalStudents: 6607 + Math.floor(Math.random() * 20) - 10,
-        avgExamScore: parseFloat((84.2 + (Math.random() * 0.4 - 0.2)).toFixed(1)),
-        avgAttendance: parseFloat((92.5 + (Math.random() * 0.4 - 0.2)).toFixed(1)),
-        predAccuracy: 97.8,
+        totalStudents: cohortMetrics.totalStudents,
+        avgExamScore: cohortMetrics.avgExamScore,
+        avgAttendance: cohortMetrics.avgAttendance,
+        avgStudyHours: cohortMetrics.avgStudyHours,
       });
       setIsRefreshing(false);
     }, 600);
@@ -133,17 +134,17 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          {/* Card 4: Pred. Accuracy */}
+          {/* Card 4: Avg. Study Hours */}
           <div className="bg-white/5 backdrop-blur-xl p-4 sm:p-5 rounded-3xl border border-white/10 shadow-lg hover:border-white/20 transition-all flex flex-col justify-between group">
             <div className="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-400/20 text-emerald-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
               <Cpu className="w-5 h-5" />
             </div>
             <div>
               <p className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-                {metrics.predAccuracy}%
+                {metrics.avgStudyHours}h
               </p>
               <p className="text-xs font-medium text-white/50 uppercase tracking-wider mt-1">
-                Pred. Accuracy
+                Avg. Study Hours
               </p>
             </div>
           </div>

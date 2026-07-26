@@ -1,5 +1,6 @@
 import React from 'react';
 import { X, Github, Linkedin, Award, Cpu, Brain, CheckCircle2 } from 'lucide-react';
+import profilePhoto from '../assets/profile-photo.png';
 
 interface ProfileModalProps {
   isOpen: boolean;
@@ -25,9 +26,9 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
           <div className="relative mb-4">
             <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden ring-4 ring-blue-500/40 shadow-xl">
               <img
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400"
+                src={profilePhoto}
                 alt="Tammana Joshit"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover [object-position:center_28%]"
               />
             </div>
             <div className="absolute bottom-1 right-1 bg-blue-500 text-white p-1.5 rounded-full shadow-md" title="Verified Architect">
@@ -47,7 +48,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
         {/* Quick Links */}
         <div className="grid grid-cols-2 gap-3 mt-6">
           <a
-            href="https://github.com"
+            href="https://github.com/Joshit-innit/Joshit-innit"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-blue-500 text-white font-bold text-sm hover:bg-blue-600 transition-all shadow-lg shadow-blue-500/30"
@@ -55,7 +56,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
             <Github className="w-4 h-4" /> GitHub
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/tammana-joshit-97516b344"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-sm transition-all border border-white/15"

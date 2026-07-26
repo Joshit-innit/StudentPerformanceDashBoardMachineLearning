@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Calendar, Clock, Brain, Globe, Download, Sparkles, Moon, Activity } from 'lucide-react';
 import { ReportModal } from '../components/ReportModal';
+import { cohortMetrics } from '../data/edaData';
 
 export const InsightsView: React.FC = () => {
   const [reportModalOpen, setReportModalOpen] = useState(false);
@@ -24,13 +25,15 @@ export const InsightsView: React.FC = () => {
       } else {
         setReportText(`Executive Academic Report
 
-1. Cohort Retention Summary
-   - Students with >92% attendance achieve 15% higher retention in core subjects.
-   - 2-3 hours of daily study yields 22% superior exam performance.
+1. Cohort Summary
+   - Total records analyzed: 6,607 students.
+   - Average exam score: 67.2%.
+   - Average attendance: 80.0%.
 
-2. Strategic Action Items
-   - Implement peer tutoring programs.
-   - Promote sleep hygiene during finals week.`);
+2. EDA Findings
+   - Attendance has the strongest observed correlation with exam score: 0.58.
+   - Hours studied also has a meaningful positive correlation: 0.45.
+   - Previous scores and tutoring sessions show smaller positive relationships.`);
       }
     } catch (err) {
       console.error(err);
@@ -51,7 +54,7 @@ export const InsightsView: React.FC = () => {
           Learning Insights & Analytics
         </h1>
         <p className="mt-1 text-white/60 text-sm leading-relaxed font-light">
-          We&apos;ve analyzed thousands of data points to find what truly moves the needle for student success.
+          Real patterns from {cohortMetrics.totalStudents.toLocaleString()} student records in the EDA notebook.
         </p>
       </div>
 
@@ -71,22 +74,22 @@ export const InsightsView: React.FC = () => {
             The Attendance Catalyst
           </h3>
           <p className="text-white/70 text-xs sm:text-sm mt-1 leading-relaxed font-light">
-            Students with attendance above 92% show a 15% higher retention rate in core STEM subjects compared to peers.
+            Attendance has the strongest positive relationship with exam score in the EDA correlation table: 0.58.
           </p>
         </div>
 
         {/* Small Bar Graph */}
         <div className="pt-2">
           <div className="h-16 flex items-end gap-2 px-1 border-b border-white/10 pb-1">
-            <div className="flex-1 bg-blue-500/30 h-[30%] rounded-t-md border border-blue-400/20" />
-            <div className="flex-1 bg-blue-500/40 h-[45%] rounded-t-md border border-blue-400/30" />
-            <div className="flex-1 bg-blue-500/50 h-[60%] rounded-t-md border border-blue-400/40" />
-            <div className="flex-1 bg-blue-500/70 h-[75%] rounded-t-md border border-blue-400/50" />
+            <div className="flex-1 bg-blue-500/30 h-[18%] rounded-t-md border border-blue-400/20" />
+            <div className="flex-1 bg-blue-500/40 h-[32%] rounded-t-md border border-blue-400/30" />
+            <div className="flex-1 bg-blue-500/50 h-[45%] rounded-t-md border border-blue-400/40" />
+            <div className="flex-1 bg-blue-500/70 h-[58%] rounded-t-md border border-blue-400/50" />
             <div className="flex-1 bg-blue-500 h-[100%] rounded-t-md border border-blue-300 shadow-md shadow-blue-500/30" />
           </div>
           <div className="flex justify-between text-[11px] text-white/50 font-mono pt-1.5 px-1">
-            <span>Low Attendance</span>
-            <span className="text-blue-400 font-bold">Peak Performance</span>
+            <span>Lower attendance</span>
+            <span className="text-blue-400 font-bold">Higher attendance</span>
           </div>
         </div>
       </div>
@@ -101,7 +104,7 @@ export const InsightsView: React.FC = () => {
             Study Sweet Spot
           </h3>
           <p className="text-white/70 text-xs sm:text-sm mt-1 leading-relaxed font-light">
-            Focusing for 2-3 hours daily yields 22% better results than &quot;marathon&quot; weekend sessions.
+            Hours studied has a 0.45 correlation with exam score, making it the second strongest signal in the EDA summary.
           </p>
         </div>
       </div>
@@ -116,7 +119,7 @@ export const InsightsView: React.FC = () => {
             The Tutoring Lift
           </h3>
           <p className="text-white/70 text-xs sm:text-sm mt-1 leading-relaxed font-light">
-            Peer-to-peer tutoring improves test confidence by 40% in complex problem-solving modules.
+            Tutoring sessions show a smaller but positive relationship with exam score: 0.16 in the preprocessed data.
           </p>
         </div>
       </div>
@@ -141,7 +144,7 @@ export const InsightsView: React.FC = () => {
             The Wellness Multiplier
           </h3>
           <p className="text-xs sm:text-sm text-white/70 mt-1 max-w-md leading-relaxed font-light">
-            Physical activity and 8+ hours of sleep correlate with a 30% increase in cognitive focus during morning exams.
+            Sleep hours and physical activity are present in the EDA, but their direct score correlations are weak in this dataset.
           </p>
         </div>
       </div>
@@ -158,15 +161,15 @@ export const InsightsView: React.FC = () => {
         </div>
 
         <p className="text-white/70 text-xs sm:text-sm leading-relaxed font-light">
-          Consistent internet access isn&apos;t just a luxury—it&apos;s a performance driver. Students with reliable home connections complete 3x more optional research tasks.
+          Internet access has a small positive correlation with exam score in the preprocessed dataset: 0.05.
         </p>
 
         <div className="space-y-1.5 pt-2">
           <div className="w-full h-2.5 bg-white/10 rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full w-[88%]" />
+            <div className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full w-[5%]" />
           </div>
           <p className="text-xs font-medium text-white/70">
-            88% of Top Decile students report High-Speed Access
+            Correlation with exam score: 0.05
           </p>
         </div>
       </div>
@@ -174,7 +177,7 @@ export const InsightsView: React.FC = () => {
       {/* Footer Text & Download Button */}
       <div className="text-center space-y-4 pt-2">
         <p className="text-xs text-white/50 max-w-sm mx-auto leading-relaxed font-light">
-          These insights are personalized based on recent data trends. Keep studying smart!
+          These insights are based on the local EDA notebook and dataset files in this project.
         </p>
 
         <button

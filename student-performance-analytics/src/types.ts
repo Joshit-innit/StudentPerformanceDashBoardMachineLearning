@@ -24,11 +24,12 @@ export interface PredictionResult {
   summary: string;
   recommendations: string[];
   factorsImpact: FactorImpact[];
+  modelUsed?: boolean;
 }
 
 export interface CohortMetrics {
   totalStudents: number;
   avgExamScore: number;
   avgAttendance: number;
-  predAccuracy: number;
+  avgStudyHours: number;
 }

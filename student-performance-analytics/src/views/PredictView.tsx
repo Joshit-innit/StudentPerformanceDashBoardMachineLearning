@@ -15,27 +15,12 @@ export const PredictView: React.FC = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [prediction, setPrediction] = useState<PredictionResult | null>({
-    predictedScore: 88.5,
-    confidenceScore: 97.8,
-    percentile: 94,
-    grade: 'A',
-    summary: 'Based on strong attendance (98%) and consistent weekly study hours (25h), the student exhibits high knowledge retention with projected top decile performance.',
-    recommendations: [
-      'Maintain regular study blocks of 2-3 hours to optimize memory retention.',
-      'Prioritize 7-8 hours of sleep during exam weeks.',
-      'Leverage online research tasks to boost problem-solving speed.'
-    ],
-    factorsImpact: [
-      { name: 'Attendance', impact: 'High Impact', value: 98 },
-      { name: 'Hours Studied', impact: 'High Impact', value: 85 },
-      { name: 'Parental Involvement', impact: 'Medium Impact', value: 65 },
-      { name: 'Sleep Quality', impact: 'Medium Impact', value: 50 },
-    ],
-  });
+  const [prediction, setPrediction] = useState<PredictionResult | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleGenerate = async () => {
     setLoading(true);
+    setError(null);
     try {
       const res = await fetch('/api/predict', {
         method: 'POST',
@@ -47,32 +32,12 @@ export const PredictView: React.FC = () => {
         const data = await res.json();
         setPrediction(data);
       } else {
-        // Fallback calculation
-        const calculated = Math.min(
-          99,
-          Math.round((profile.previousScore * 0.4 + profile.attendance * 0.4 + profile.studyHours * 0.5) * 10) / 10
-        );
-        setPrediction({
-          predictedScore: calculated,
-          confidenceScore: 97.8,
-          percentile: 92,
-          grade: calculated >= 90 ? 'A+' : calculated >= 80 ? 'A' : 'B',
-          summary: 'High study consistency and elevated attendance provide a solid foundation for top tier exam outcomes.',
-          recommendations: [
-            'Maintain daily review sessions.',
-            'Ensure adequate sleep before exam day.',
-            'Practice past exam questions under timed conditions.'
-          ],
-          factorsImpact: [
-            { name: 'Attendance', impact: 'High Impact', value: profile.attendance },
-            { name: 'Hours Studied', impact: 'High Impact', value: Math.min(profile.studyHours * 3, 90) },
-            { name: 'Parental Involvement', impact: 'Medium Impact', value: 65 },
-            { name: 'Sleep Quality', impact: 'Medium Impact', value: profile.sleepHours * 10 },
-          ]
-        });
+        const message = await res.text();
+        throw new Error(message || 'Prediction request failed');
       }
     } catch (err) {
       console.error(err);
+      setError('Could not reach the Spring Boot model API. Start the backend on port 8080 and try again.');
     } finally {
       setLoading(false);
     }
@@ -219,6 +184,11 @@ export const PredictView: React.FC = () => {
           )}
           <span>{loading ? 'Calculating Prediction...' : '✨ Generate Score Prediction'}</span>
         </button>
+        {error && (
+          <div className="rounded-2xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-xs text-red-200">
+            {error}
+          </div>
+        )}
       </div>
 
       {/* Prediction Result Display */}
@@ -227,7 +197,7 @@ export const PredictView: React.FC = () => {
           <div className="text-center space-y-2">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-semibold">
               <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>Prediction Complete</span>
+              <span>{prediction.modelUsed ? 'Trained Model Prediction' : 'Prediction Complete'}</span>
             </div>
             <h3 className="text-2xl font-bold text-white">
               Predicted Score: <span className="text-blue-400 font-extrabold">{prediction.predictedScore}%</span>

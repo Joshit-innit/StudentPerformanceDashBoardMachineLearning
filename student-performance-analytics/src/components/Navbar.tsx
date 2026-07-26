@@ -1,6 +1,7 @@
 import React from 'react';
 import { TabType } from '../types';
 import { GraduationCap } from 'lucide-react';
+import profilePhoto from '../assets/profile-photo.png';
 
 interface NavbarProps {
   currentTab: TabType;
@@ -49,9 +50,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, onOpenProfile }) => 
           <div className="relative">
             <div className="w-9 h-9 rounded-full overflow-hidden ring-2 ring-blue-500/50 group-hover:ring-blue-400 transition-all shadow-md">
               <img
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200"
+                src={profilePhoto}
                 alt="Tammana Joshit"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover [object-position:center_28%]"
               />
             </div>
             <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 ring-2 ring-[#0A0B1A] rounded-full"></span>

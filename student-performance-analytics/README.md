@@ -1,20 +1,27 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
-
-# Run and deploy your AI Studio app
-
-This contains everything you need to run your app locally.
-
-View your app in AI Studio: https://ai.studio/apps/37231f89-9e57-410f-affd-21db90331dd6
+# Student Performance Analytics Frontend
 
 ## Run Locally
 
-**Prerequisites:**  Node.js
+**Prerequisites:** Node.js and the Spring Boot backend in `../Backend`.
 
+1. Start the backend:
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+cd ../Backend
+./gradlew bootRun
+```
+
+2. Install frontend dependencies:
+
+```bash
+npm install
+```
+
+3. Run the website:
+
+```bash
+npm run dev
+```
+
+The website runs at `http://localhost:5173` and proxies `/api` requests to the
+Spring Boot backend at `http://localhost:8080`.
