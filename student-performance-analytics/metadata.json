@@ -1,0 +1,6 @@
+{
+  "name": "Student Performance Analytics",
+  "description": "Monitor academic performance, explore trends, and predict student exam scores using an intelligent analytics platform.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
