@@ -94,53 +94,6 @@ curl -X POST http://localhost:8080/api/predict \
   -d '{"studyHours":25,"attendance":98,"previousScore":85,"sleepHours":8,"motivation":"Medium","internetAccess":true,"extracurriculars":false}'
 ```
 
-## Run Locally
-
-### Backend
-
-```bash
-python3 -m venv Backend/.venv
-Backend/.venv/bin/python -m pip install -r Backend/requirements.txt
-
-cd Backend
-./gradlew bootRun
-```
-
-Backend runs at:
-
-```text
-http://localhost:8080
-```
-
-### Frontend
-
-```bash
-cd student-performance-analytics
-npm install
-npm run dev
-```
-
-Frontend runs at:
-
-```text
-http://localhost:5173
-```
-
-## Deployment
-
-The project is configured for:
-
-- Netlify frontend deployment using `netlify.toml`.
-- Render backend deployment using `render.yaml` and `Backend/Dockerfile`.
-
-For full steps, see [DEPLOYMENT.md](DEPLOYMENT.md).
-
-In Netlify, set:
-
-```text
-VITE_API_BASE_URL=https://your-render-backend-url.onrender.com
-```
-
 ## Model Improvement Roadmap
 
 Future improvements for the ML side:
