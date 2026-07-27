@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Calendar, Clock, Brain, Globe, Download, Sparkles, Moon, Activity } from 'lucide-react';
 import { ReportModal } from '../components/ReportModal';
 import { cohortMetrics } from '../data/edaData';
+import { apiUrl } from '../lib/api';
 
 export const InsightsView: React.FC = () => {
   const [reportModalOpen, setReportModalOpen] = useState(false);
@@ -13,7 +14,7 @@ export const InsightsView: React.FC = () => {
     setReportLoading(true);
 
     try {
-      const res = await fetch('/api/insights/report', {
+      const res = await fetch(apiUrl('/api/insights/report'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ category: 'Pedagogical Insights', studentCohort: 'STEM & Humanities 2026' }),

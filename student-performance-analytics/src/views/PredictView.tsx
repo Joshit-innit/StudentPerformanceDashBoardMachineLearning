@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Predictor3DOrb } from '../components/three/Predictor3DOrb';
 import { StudentProfile, PredictionResult } from '../types';
 import { Sparkles, Info, CheckCircle2, Sliders, Brain, RefreshCw } from 'lucide-react';
+import { apiUrl } from '../lib/api';
 
 export const PredictView: React.FC = () => {
   const [profile, setProfile] = useState<StudentProfile>({
@@ -22,7 +23,7 @@ export const PredictView: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch('/api/predict', {
+      const res = await fetch(apiUrl('/api/predict'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(profile),

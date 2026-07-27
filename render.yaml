@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: student-performance-backend
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Backend/Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      - key: PREDICT_PYTHON
+        value: /app/Backend/.venv/bin/python

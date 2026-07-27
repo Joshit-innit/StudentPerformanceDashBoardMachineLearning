@@ -1,0 +1,10 @@
+.git
+.gradle
+Backend/.gradle
+Backend/.venv
+Backend/build
+student-performance-analytics/node_modules
+student-performance-analytics/dist
+student-performance-analytics/.env
+student-performance-analytics/.env.local
+**/.DS_Store
